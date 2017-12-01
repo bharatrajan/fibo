@@ -23,3 +23,8 @@ Specs
 ===
 
 A new service that allows users to compute the fibonacci number of a given input at super fast speeds. A minimal interface, that allows a user to input a number, and view the output (the nth fibonacci number).
+
+Credits
+===
+
+- Big number handling : https://github.com/MikeMcl/bignumber.js

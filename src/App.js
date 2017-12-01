@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import bigInt from 'big-integer';
 
 class App extends Component {
   constructor(props) {
@@ -8,22 +9,18 @@ class App extends Component {
     this.onSubmit = this.onSubmit.bind(this);    
   }
   
-  fiboArray = [0, 1, 1];
+  fiboArray = [bigInt(0), bigInt(1), bigInt(1)];
 
   state = {
-    result : 0,
+    result : bigInt(0),
     isNValid : true
-  }
-
-  componentDidMount = () => {
-    Number.MAX_SAFE_INTEGER = Math.pow(2, 53)-1;
   }
 
   getFibo = n => {
     if(typeof this.fiboArray[n] !== 'undefined') return this.fiboArray[n];
 
     for(let i = this.fiboArray.length; i<n+1; i++){ 
-      this.fiboArray[i] = this.fiboArray[i-1] + this.fiboArray[i-2];
+      this.fiboArray[i] = this.fiboArray[i-1].add(this.fiboArray[i-2]);
       let str = `${this.fiboArray[i]} of ${i} is safe : ${Number.isSafeInteger(this.fiboArray[i])}`;
       console.log(str)
     }
@@ -36,13 +33,15 @@ class App extends Component {
     const n = parseInt(inputBoxVal);
 
     if(typeof n == 'number' && n > 0){
-      let result = this.getFibo(n);
+      let nthFibo = this.getFibo(n);
+      let result = nthFibo.isSmall ? nthFibo.value : nthFibo.value.reverse().join(',')
       this.setState({
         result,
         isNValid : true
       });
     }else{
       this.setState({
+        result: 0,
         isNValid : false    
       })
     }

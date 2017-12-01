@@ -6,7 +6,6 @@ Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
 ## Fibonacci Sequence
-===
 
 The Fibonacci sequence `F(n)` can be defined by:
 
@@ -20,7 +19,7 @@ https://en.wikipedia.org/wiki/Fibonacci_number
 
 ---
 
-Specification
+Specs
 ===
 
-A new service that allows users to compute the fibonacci number of a given input at super fast speeds. Please create a minimal interface, that allows a user to input a number, and view the output (the nth fibonacci number).
+A new service that allows users to compute the fibonacci number of a given input at super fast speeds. A minimal interface, that allows a user to input a number, and view the output (the nth fibonacci number).

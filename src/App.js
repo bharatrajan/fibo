@@ -11,7 +11,12 @@ class App extends Component {
     this.onSubmit = this.onSubmit.bind(this);    
   }
 
-  fiboArray = [bignumber(0), bignumber(1), bignumber(1)];
+  //fiboArray = [bignumber(0), bignumber(1), bignumber(1)];
+  fiboObj = {
+    0:bignumber(0), 
+    1:bignumber(1), 
+    2:bignumber(1)
+  };
   
   state = {
     result : bignumber(0),
@@ -46,7 +51,7 @@ class App extends Component {
 
     if(validationResult.isNValid){
 
-      let nthFibo = getFibo(validationResult.nthPlace, this.fiboArray);
+      let nthFibo = getFibo(validationResult.nthPlace, this.fiboObj);
       let result = nthFibo.c.length === 1 ? 
                    nthFibo.c[0]:
                    resultReducer(nthFibo.c);

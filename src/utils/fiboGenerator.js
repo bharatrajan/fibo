@@ -5,7 +5,7 @@ export const getFiboNCache = (n, fiboStorage) => {
 
     if(typeof fiboStorage[n] !== 'undefined'){
       let endTime = startTime - new Date().getTime();
-      console.log(`${n} : Time taken = ${endTime}`)  
+      console.log(`F(${n}) : Time taken = ${endTime}ms`)  
       return fiboStorage[n]
     };
 
@@ -14,39 +14,50 @@ export const getFiboNCache = (n, fiboStorage) => {
     }
 
     let endTime = new Date().getTime() - startTime;
-    console.log(`${n} : Time taken = ${endTime}`)
+    console.log(`F(${n}) : Time taken = ${endTime}ms`)
 
     return fiboStorage[n];
 }  
 
+const getNearestFiboIndex = (n, fiboStorage, keys) => {
+  let i , idx;
+  for(i = 0; i < keys.length; i++){
+    idx = parseInt(keys[i])
+    if(idx > n) return parseInt(keys[i-1]);
+  }
+}
 
 export const getFibo = (n, fiboStorage) => {
   let startTime = new Date().getTime();
 
   if(typeof fiboStorage[n] !== 'undefined'){
     let endTime = startTime - new Date().getTime();
-    console.log(`${n} : Time taken = ${endTime}`)  
+    console.log(`F(${n}) : Time taken = ${endTime}ms`)  
     return fiboStorage[n]
   };
   
-  let a,b,c,iterer,startVal;
+  let a,b,c,
+  iterer,startVal,
+  keys = Object.keys(fiboStorage),
+  lastFiboN = parseInt(keys[keys.length - 1]);
 
-  if(fiboStorage.length === 3){
+  if(lastFiboN === 2){
     a = bignumber(0);
     b = bignumber(1);
     startVal = 2;    
-  }else if(fiboStorage.length < n){
-    a = fiboStorage[fiboStorage.length-2];
-    b = fiboStorage[fiboStorage.length-1];
-    startVal = fiboStorage.length;
-  }else{
-    let iterer2 = n;
-    while(!fiboStorage[iterer2]){
-      iterer2--;
-    }
-    a = fiboStorage[iterer2-1];
-    b = fiboStorage[iterer2];
-    startVal = iterer2 + 1;
+  }
+
+  else if(lastFiboN < n){
+    a = fiboStorage[lastFiboN-1];
+    b = fiboStorage[lastFiboN];
+    startVal = lastFiboN + 1;
+  }
+
+  else{
+    let nearestFiboIndex = getNearestFiboIndex(n, fiboStorage, keys);
+    a = fiboStorage[nearestFiboIndex-1];
+    b = fiboStorage[nearestFiboIndex];
+    startVal = nearestFiboIndex + 1;
   }
 
   
@@ -60,6 +71,6 @@ export const getFibo = (n, fiboStorage) => {
   fiboStorage[n] = b;
 
   let endTime = new Date().getTime() - startTime;
-  console.log(`${n} : Time taken = ${endTime}`)
+  console.log(`F(${n}) : Time taken = ${endTime}ms`)
   return b;
 }

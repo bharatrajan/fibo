@@ -12,13 +12,12 @@ class App extends Component {
   }
 
   fiboArray = [bignumber(0), bignumber(1), bignumber(1)];
-
+  
   state = {
     result : bignumber(0),
     isNValid : true,
     nthPlace: 0
   }
-
 
 
   onSubmit = event => {
@@ -30,7 +29,7 @@ class App extends Component {
       let result = nthFibo.c.length === 1 ? 
                    nthFibo.c[0]:
                    resultReducer(nthFibo.c);
-      
+      console.log("this.fiboObj : ", this.fiboObj)
       this.setState({
         result,
         nthPlace,   
@@ -50,7 +49,6 @@ class App extends Component {
 
   render() {
     const {nthPlace, result, isNValid} = this.state;
-
     return (
       <div className='app'>
         <div className="input-box-wrapper">

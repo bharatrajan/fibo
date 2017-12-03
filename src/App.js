@@ -3,7 +3,7 @@ import './App.css';
 import bignumber from 'bignumber.js';
 import { debug } from 'util';
 import { resultReducer } from './utils/reducer.js';
-import { getFibo } from './utils/fiboGenerator.js';
+import { getFibo, getFiboNCache } from './utils/fiboGenerator.js';
 
 class App extends Component {
   constructor(props) {
@@ -19,28 +19,46 @@ class App extends Component {
     nthPlace: 0
   }
 
+  validateInputValue = val => {
+    let validationResult = {
+      nthPlace : 0,
+      isNValid : false
+    };
+
+    if(!val){ 
+      return validationResult;
+    }
+
+    const nthPlace = parseInt(val);
+    if(nthPlace == val && nthPlace > 0){
+      return {
+        nthPlace,
+        isNValid : true  
+      }
+    }else{ 
+      return validationResult;
+    }   
+
+  }
 
   onSubmit = event => {
-    const nthPlace = parseInt(this.refs.inputBox.value);
+    const validationResult = this.validateInputValue(this.refs.inputBox.value);
 
-    if(Number.isInteger(nthPlace) && nthPlace > 0){
+    if(validationResult.isNValid){
 
-      let nthFibo = getFibo(nthPlace, this.fiboArray);
+      let nthFibo = getFibo(validationResult.nthPlace, this.fiboArray);
       let result = nthFibo.c.length === 1 ? 
                    nthFibo.c[0]:
                    resultReducer(nthFibo.c);
-      console.log("this.fiboObj : ", this.fiboObj)
       this.setState({
         result,
-        nthPlace,   
-        isNValid : true
+        ...validationResult
       });
 
     }else{
       this.setState({
         result: bignumber(0),
-        nthPlace: 0,        
-        isNValid : false    
+        ...validationResult
       })
     }
 

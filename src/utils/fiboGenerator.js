@@ -21,12 +21,14 @@ let fiboArr = [bignumber(0),bignumber(1),bignumber(1)]
 export const getFiboNCache = n => {
   let startTime = new Date().getTime();
 
+  //If F(n) is already present in fiboArr then return fiboArr[n]
   if (typeof fiboArr[n] !== 'undefined') {
     let endTime = startTime - new Date().getTime();
     console.log(`F(${n}) : Time taken = ${endTime}ms`);
     return fiboArr[n];
   }
 
+  //Compute F(n) by adding F(n-1) & F(n-1)
   for (let i = fiboArr.length; i < n + 1; i++) {
     fiboArr[i] = fiboArr[i - 1].plus(fiboArr[i - 2]);
   }
@@ -79,6 +81,7 @@ const getNearestFiboIndex = (n, fiboStorage, keys) => {
 export const getFibo = n => {
   let startTime = new Date().getTime();
 
+  //If F(n) is already present in fiboStorage then return fiboStorage.n  
   if (typeof fiboStorage[n] !== 'undefined') {
     let endTime = startTime - new Date().getTime();
     console.log(`F(${n}) : Time taken = ${endTime}ms`);
@@ -91,23 +94,24 @@ export const getFibo = n => {
     iterer,
     startVal,
     keys = Object.keys(fiboStorage),
-    lastFiboN = parseInt(keys[keys.length - 1]);
+    biggestFiboIndex = parseInt(keys[keys.length - 1]);
 
-  if (lastFiboN === 2) {
+  if (biggestFiboIndex === 2) {//First time user computing F(n)
     a = bignumber(0);
     b = bignumber(1);
     startVal = 2;
-  } else if (lastFiboN < n) {
-    a = fiboStorage[lastFiboN - 1];
-    b = fiboStorage[lastFiboN];
-    startVal = lastFiboN + 1;
-  } else {
+  } else if (biggestFiboIndex < n) {//Computing F(n) bigger than biggest Fibonacci in fiboStorage
+    a = fiboStorage[biggestFiboIndex - 1];
+    b = fiboStorage[biggestFiboIndex];
+    startVal = biggestFiboIndex + 1;
+  } else {//Computing F(n) where 1 < n < biggestFiboIndex
     let nearestFiboIndex = getNearestFiboIndex(n, fiboStorage, keys);
     a = fiboStorage[nearestFiboIndex - 1];
     b = fiboStorage[nearestFiboIndex];
     startVal = nearestFiboIndex + 1;
   }
 
+  //Compute F(n) by adding F(n-1) & F(n-1)  
   for (iterer = startVal; iterer <= n; iterer++) {
     c = a.plus(b);
     a = b;

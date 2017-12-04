@@ -1,0 +1,67 @@
+//============================== Method 1 : With caching ==============================
+console.log src/utils/fiboGenerator.js:27
+    F(1) : Time taken = 0ms
+
+  console.log src/utils/fiboGenerator.js:37
+    F(20) : Time taken = 1ms
+
+  console.log src/utils/fiboGenerator.js:37
+    F(50) : Time taken = 0ms
+
+  console.log src/utils/fiboGenerator.js:37
+    F(100) : Time taken = 0ms
+
+  console.log src/utils/fiboGenerator.js:37
+    F(200) : Time taken = 0ms
+
+  console.log src/utils/fiboGenerator.js:37
+    F(2004) : Time taken = 3ms
+
+  console.log src/utils/fiboGenerator.js:37
+    F(5050) : Time taken = 4ms
+
+  console.log src/utils/fiboGenerator.js:27
+    F(3055) : Time taken = 0ms
+
+  console.log src/utils/fiboGenerator.js:27
+    F(1035) : Time taken = 0ms
+
+  console.log src/utils/fiboGenerator.js:27
+    F(2003) : Time taken = 0ms
+
+  console.log src/utils/fiboGenerator.js:37
+    F(100000) : Time taken = 1684ms
+  
+  //============================== Method 2 : WithOUT caching ==============================
+  console.log src/utils/fiboGenerator.js:87
+    F(1) : Time taken = 0ms
+
+  console.log src/utils/fiboGenerator.js:125
+    F(20) : Time taken = 0ms
+
+  console.log src/utils/fiboGenerator.js:125
+    F(50) : Time taken = 0ms
+
+  console.log src/utils/fiboGenerator.js:125
+    F(100) : Time taken = 0ms
+
+  console.log src/utils/fiboGenerator.js:125
+    F(200) : Time taken = 1ms
+
+  console.log src/utils/fiboGenerator.js:125
+    F(2004) : Time taken = 8ms
+
+  console.log src/utils/fiboGenerator.js:125
+    F(5050) : Time taken = 3ms
+
+  console.log src/utils/fiboGenerator.js:125
+    F(3055) : Time taken = 2ms
+
+  console.log src/utils/fiboGenerator.js:125
+    F(1035) : Time taken = 0ms
+
+  console.log src/utils/fiboGenerator.js:87
+    F(2003) : Time taken = 0ms
+
+  console.log src/utils/fiboGenerator.js:125
+    F(100000) : Time taken = 1152ms

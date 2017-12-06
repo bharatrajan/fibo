@@ -19,12 +19,9 @@ let fiboArr = [bignumber(0),bignumber(1),bignumber(1)]
   * @returns bignumber object carrying nth Fibonacci number
   */
 export const getFiboNCache = n => {
-  let startTime = new Date().getTime();
 
   //If F(n) is already present in fiboArr then return fiboArr[n]
   if (typeof fiboArr[n] !== 'undefined') {
-    let endTime = startTime - new Date().getTime();
-    console.log(`F(${n}) : Time taken = ${endTime}ms`);
     return fiboArr[n];
   }
 
@@ -32,9 +29,6 @@ export const getFiboNCache = n => {
   for (let i = fiboArr.length; i < n + 1; i++) {
     fiboArr[i] = fiboArr[i - 1].plus(fiboArr[i - 2]);
   }
-
-  let endTime = new Date().getTime() - startTime;
-  console.log(`F(${n}) : Time taken = ${endTime}ms`);
 
   return fiboArr[n];
 };
@@ -79,12 +73,8 @@ const getNearestFiboIndex = (n, fiboStorage, keys) => {
   * @returns bignumber object carrying nth Fibonacci number
   */
 export const getFibo = n => {
-  let startTime = new Date().getTime();
-
   //If F(n) is already present in fiboStorage then return fiboStorage.n  
   if (typeof fiboStorage[n] !== 'undefined') {
-    let endTime = startTime - new Date().getTime();
-    console.log(`F(${n}) : Time taken = ${endTime}ms`);
     return fiboStorage[n];
   }
 
@@ -120,8 +110,5 @@ export const getFibo = n => {
 
   fiboStorage[n - 1] = a;
   fiboStorage[n] = b;
-
-  let endTime = new Date().getTime() - startTime;
-  console.log(`F(${n}) : Time taken = ${endTime}ms`);
   return b;
 };

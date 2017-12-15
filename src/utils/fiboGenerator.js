@@ -33,13 +33,22 @@ export const getFiboNCache = n => {
   return fiboArr[n];
 };
 
+/*/
+  * TIME : 
+  ** O(N) for new N
+  ** O(1) for N if N is cached
+  
+  * SPACE : 
+  ** stricly O(N)
+/*/
+
 //============================== Method 2 : WithOUT caching ==============================
 
 /**
-* @description - A local storage to store the list of fibonacci numbers found.
-* @description - Lives until the session lives
-* @description - Used for computing future fibonacci numbers
-*/
+  * @description - A local storage to store the list of fibonacci numbers found.
+  * @description - Lives until the session lives
+  * @description - Used for computing future fibonacci numbers
+  */
 let fiboStorage = {
   0: bignumber(0),
   1: bignumber(1),
@@ -112,3 +121,91 @@ export const getFibo = n => {
   fiboStorage[n] = b;
   return b;
 };
+
+/*/
+  * TIME : 
+  ** O(N) for any N
+
+  * SPACE : 
+  ** stricly O(N)
+/*/
+
+
+//============================== Method 3 : Partial memoization ==========================
+  /**
+    * @description - A local array to store the list of fibonacci numbers found.
+    * @description - Stores all fibonacci numbers from F(0), F(1) , F(2), every 9th F(n) & every 10th F(n)
+    * @description - Lives until the session lives
+    * @description - Used for computing future fibonacci numbers
+    */
+  let partialCacheArr = [
+    bignumber(0),
+    bignumber(1),
+    bignumber(1)
+  ]
+
+  /**
+    * @description - Compute F(n) by simply adding F(n-1) & F(n-1), serially in loop at O(N)
+    * @description - Stores F(n-1) and F(n) when F(n) is calculated into 'partialCacheArr'
+    * @description - Stores every 9th F(n) & every 10th F(n), calculated into 'partialCacheArr'
+    * @utility
+    * @param {integer} n - nth Fibonacci to be computed
+    * @returns bignumber object carrying nth Fibonacci number
+    */
+  export const getFiboNPartiallyCache = n => {
+    //If F(n) is already present in partialCacheArr then return partialCacheArr[n]  
+    if(partialCacheArr[n]) return partialCacheArr[n];
+
+    let a,
+      b,
+      c,
+      iterer,
+      startVal;
+      
+      if(n < 11){
+        //F(n) where n between 3 - 10
+        a = partialCacheArr[1];
+        b = partialCacheArr[2];
+        startVal = 3;
+      
+      }else if( n > partialCacheArr.length-1){
+        //F(n) where n greater than biggestAvailableFiboNumber
+        a = partialCacheArr[partialCacheArr.length - 2];
+        b = partialCacheArr[partialCacheArr.length - 1];
+        startVal = partialCacheArr.length;
+      
+      } else{
+        //F(n) where 1 < n < biggestAvailableFiboNumber
+        let nearestFiboIndex = (n - (n%10));
+        a = partialCacheArr[nearestFiboIndex - 1];
+        b = partialCacheArr[nearestFiboIndex];
+        startVal = nearestFiboIndex + 1;
+      }
+
+      //Compute F(n) by adding F(n-1) & F(n-1)  
+      for (iterer = startVal; iterer <= n; iterer++) {
+        c = a.plus(b);
+        a = b;
+        b = c;
+
+        if(iterer % 10 === 0){
+          //Store every 9th & 10th Fibonacci number in partialCacheArr  
+          partialCacheArr[iterer - 1] = a;
+          partialCacheArr[iterer] = b;
+        }
+      }
+
+      partialCacheArr[n - 1] = a;
+      partialCacheArr[n] = b;
+      return b;
+      
+};
+
+/*/
+  * TIME : 
+  ** O(N) for new N
+  ** O(10) for any 10 < N < cache length
+  
+  * SPACE : 
+  ** Less than O(N)
+/*/

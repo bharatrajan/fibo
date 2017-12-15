@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import bignumber from 'bignumber.js';
 import { resultReducer } from './utils/reducer.js';
-import { getFibo } from './utils/fiboGenerator.js';
+import { getFiboNPartiallyCache } from './utils/fiboGenerator.js';
 
 /**
 * @description - Simple form takes an integer (n) and
@@ -69,7 +69,7 @@ class App extends Component {
     const validationResult = this.validateInputValue(this.refs.inputBox.value);
 
     if (validationResult.isNValid) {
-      let nthFibo = getFibo(validationResult.nthPlace);
+      let nthFibo = getFiboNPartiallyCache(validationResult.nthPlace);
       let result =
         nthFibo.c.length === 1 ? nthFibo.c[0] : resultReducer(nthFibo.c);
       this.setState({

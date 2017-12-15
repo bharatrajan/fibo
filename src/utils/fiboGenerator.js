@@ -19,10 +19,8 @@ let fiboArr = [bignumber(0),bignumber(1),bignumber(1)]
   * @returns bignumber object carrying nth Fibonacci number
   */
 export const getFiboNCache = n => {
-  let startTime = new Date().getTime()
   //If F(n) is already present in fiboArr then return fiboArr[n]
   if (typeof fiboArr[n] !== 'undefined') {
-    console.log(`Time for F(${n}) is ${new Date().getTime() - startTime} with Method 1 : With caching`)  
     return fiboArr[n];
   }
 
@@ -31,7 +29,6 @@ export const getFiboNCache = n => {
     fiboArr[i] = fiboArr[i - 1].plus(fiboArr[i - 2]);
   }
 
-  console.log(`Time for F(${n}) is ${new Date().getTime() - startTime} with Method 1 : With caching`)
   return fiboArr[n];
 };
 
@@ -84,11 +81,9 @@ const getNearestFiboIndex = (n, fiboStorage, keys) => {
   * @returns bignumber object carrying nth Fibonacci number
   */
 export const getFibo = n => {
-  let startTime = new Date().getTime()
   
   //If F(n) is already present in fiboStorage then return fiboStorage.n  
   if (typeof fiboStorage[n] !== 'undefined') {
-    console.log(`Time for F(${n}) is ${new Date().getTime() - startTime} with (Method 2 : WithOUT caching)`)  
     return fiboStorage[n];
   }
 
@@ -125,7 +120,6 @@ export const getFibo = n => {
   fiboStorage[n - 1] = a;
   fiboStorage[n] = b;
 
-  console.log(`Time for F(${n}) is ${new Date().getTime() - startTime} with (Method 2 : WithOUT caching)`)  
   return b;
 };
 
@@ -160,11 +154,9 @@ export const getFibo = n => {
     * @returns bignumber object carrying nth Fibonacci number
     */
   export const getFiboNPartiallyCache = n => {
-    let startTime = new Date().getTime()
     
     //If F(n) is already present in partialCacheArr then return partialCacheArr[n]  
     if(partialCacheArr[n]){ 
-      console.log(`Time for F(${n}) is ${new Date().getTime() - startTime} (Method 3 : Partial memoization)`)
       return partialCacheArr[n];
     }
 
@@ -210,7 +202,6 @@ export const getFibo = n => {
       partialCacheArr[n - 1] = a;
       partialCacheArr[n] = b;
     
-      console.log(`Time for F(${n}) is ${new Date().getTime() - startTime} with (Method 3 : Partial memoization)`)  
       return b;
       
 };

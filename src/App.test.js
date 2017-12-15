@@ -7,7 +7,7 @@ import App from './App';
 
 import bignumber from 'bignumber.js';
 import { resultReducer } from './utils/reducer.js';
-import { getFibo, getFiboNCache } from './utils/fiboGenerator.js';
+import { getFibo, getFiboNCache, getFiboNPartiallyCache } from './utils/fiboGenerator.js';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
@@ -50,6 +50,7 @@ it('find timings without cache', () => {
     1: bignumber(1),
     2: bignumber(1)
   };
+  console.log("")
 
   let result1 = getFibo(1, fiboObj);
   let result2 = getFibo(20, fiboObj);
@@ -62,6 +63,24 @@ it('find timings without cache', () => {
   let result11 = getFibo(1035, fiboObj);
   let result12 = getFibo(2003, fiboObj);
   let result5 = getFibo(100000, fiboObj);
+
+  expect(0).toEqual(0);
+});
+
+it('find timings with partial cache', () => {
+  let fiboArray = [bignumber(0), bignumber(1), bignumber(1)];
+  console.log("")
+  let result1 = getFiboNPartiallyCache(1, fiboArray);
+  let result2 = getFiboNPartiallyCache(20, fiboArray);
+  let result4 = getFiboNPartiallyCache(50, fiboArray);
+  let result3 = getFiboNPartiallyCache(100, fiboArray);
+  let result7 = getFiboNPartiallyCache(200, fiboArray);
+  let result8 = getFiboNPartiallyCache(2004, fiboArray);
+  let result9 = getFiboNPartiallyCache(5050, fiboArray);
+  let result10 = getFiboNPartiallyCache(3055, fiboArray);
+  let result11 = getFiboNPartiallyCache(1035, fiboArray);
+  let result12 = getFiboNPartiallyCache(2003, fiboArray);
+  let result5 = getFiboNPartiallyCache(100000, fiboArray);
 
   expect(0).toEqual(0);
 });

@@ -3,6 +3,8 @@ import './App.css';
 import bignumber from 'bignumber.js';
 import { resultReducer } from './utils/reducer.js';
 import { getFibo } from './utils/fiboGenerator.js';
+import Mycomponent from './Mycomponent';
+
 
 /**
 * @description - Simple form takes an integer (n) and
@@ -20,6 +22,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
+    //this.onChange = this.onChange.bind(this);
   }
 
   state = {
@@ -84,6 +87,11 @@ class App extends Component {
     }
   };
 
+  onChange = (e) => {
+    console.log("val : ", e.target.value)
+  }
+
+
   /**
    * @description: Template renderer
    * @param: None
@@ -93,9 +101,22 @@ class App extends Component {
     const { nthPlace, result, isNValid } = this.state;
     return (
       <div className="app">
+        <Mycomponent
+          id='dfad'
+          ref = {(mc) => this.mc = mc}
+        ></Mycomponent>
+
         <div className="input-box-wrapper">
           n ={' '}
           <input type="text" ref="inputBox" placeholder="Positive integer" />
+
+          <select onChange={this.onChange.bind(this)} defaultValue="saab">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+          </select>
+
           <button className="submit-button" onClick={this.onSubmit}>
             {' '}Submit{' '}
           </button>

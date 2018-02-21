@@ -4,6 +4,7 @@ import bignumber from 'bignumber.js';
 import { resultReducer } from './utils/reducer.js';
 import { getFibo } from './utils/fiboGenerator.js';
 import Mycomponent from './Mycomponent';
+import {Helmet} from "react-helmet";
 
 
 /**
@@ -99,18 +100,29 @@ class App extends Component {
    */
   render() {
     const { nthPlace, result, isNValid } = this.state;
+    let c = React.Children;
     return (
       <div className="app">
+      <Helmet>
+        <script> window.carApi = '/api' </script>
+        <meta charSet="utf-8" />
+        <title>My Title</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>      
         <Mycomponent
           id='dfad'
           ref = {(mc) => this.mc = mc}
         ></Mycomponent>
 
+        <div>
+          props = {this.props.maami}
+        </div>
+
         <div className="input-box-wrapper">
           n ={' '}
           <input type="text" ref="inputBox" placeholder="Positive integer" />
 
-          <select onChange={this.onChange.bind(this)} defaultValue="saab">
+          <select onChange={this.onChange.bind(this)} defaultValue="audi">
             <option value="volvo">Volvo</option>
             <option value="saab">Saab</option>
             <option value="mercedes">Mercedes</option>

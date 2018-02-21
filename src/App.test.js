@@ -19,7 +19,7 @@ describe('set up', () => {
 
   it('tests jest is there or not', ()=>{
     let cb = jest.fn();
-    cb.mockReturnValueOnce(true)
+        cb.mockReturnValueOnce(true)
     let ans = cb("My val")
     console.log("cb : ", cb.mock.calls)
     expect(ans).toBeTruthy();
@@ -31,10 +31,10 @@ describe('Select box', () => {
     const component = shallow(<App />);
     const selectBox = component.find('select');
     expect(selectBox.node.props.defaultValue).toEqual('audi');    
-  })  
+  });  
 
   it('tests select box onChange', ()=>{
-    const component = mount(<App />);
+    const component = shallow(<App />);
     const selectBox = component.find('select');
     let cb = jest.fn();
     selectBox.onChange = cb;
@@ -46,11 +46,17 @@ describe('Select box', () => {
 })
 
 describe('comparison', () => {
-  it('should match the snapshot data', () => {
-    const component = renderer.create(<App />);
+  it('should match the snapshot data 003', () => {
+    const component = renderer.create(<App maami="003"></App>);
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
+
+  it('should match the snapshot data foo', () => {
+    const component = renderer.create(<App maami="foo"></App>);
+    let tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });  
 
   it("input box placeholder='Positive integer'", () => {
     const component = shallow(<App />);

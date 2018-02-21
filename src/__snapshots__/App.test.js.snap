@@ -1,10 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`comparison should match the snapshot data 1`] = `
+exports[`comparison should match the snapshot data 003 1`] = `
 <div
   className="app"
 >
   1
+  BHARAT
+  <div>
+    props = 
+    003
+  </div>
   <div
     className="input-box-wrapper"
   >
@@ -15,7 +20,71 @@ exports[`comparison should match the snapshot data 1`] = `
       type="text"
     />
     <select
-      defaultValue="saab"
+      defaultValue="audi"
+      onChange={[Function]}
+    >
+      <option
+        value="volvo"
+      >
+        Volvo
+      </option>
+      <option
+        value="saab"
+      >
+        Saab
+      </option>
+      <option
+        value="mercedes"
+      >
+        Mercedes
+      </option>
+      <option
+        value="audi"
+      >
+        Audi
+      </option>
+    </select>
+    <button
+      className="submit-button"
+      onClick={[Function]}
+    >
+       
+      Submit
+       
+    </button>
+  </div>
+  <div
+    className="error-msg-box-wrapper"
+  />
+  <div
+    className="result-box-wrapper"
+  >
+    
+  </div>
+</div>
+`;
+
+exports[`comparison should match the snapshot data foo 1`] = `
+<div
+  className="app"
+>
+  1
+  BHARAT
+  <div>
+    props = 
+    foo
+  </div>
+  <div
+    className="input-box-wrapper"
+  >
+    n =
+     
+    <input
+      placeholder="Positive integer"
+      type="text"
+    />
+    <select
+      defaultValue="audi"
       onChange={[Function]}
     >
       <option

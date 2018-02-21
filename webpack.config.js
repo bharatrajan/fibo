@@ -10,7 +10,7 @@ const port = process.env.PORT || 3000;
 module.exports = {
   
   entry: {
-    vendor: ['./src/Mycomponent.js'],
+    vendor: ['./src/utils/env.js'],
     app: ['./src/index.js']
   },
   output: {
@@ -47,30 +47,29 @@ module.exports = {
     ]
   },  
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: Infinity
-    }),
-
     new CleanWebpackPlugin(['dist']),
-    
-    new ManifestPlugin({seed:{
-      'ompa' : "loompa"
-    }}),
-    
+
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production')
       }
     }),
+
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: Infinity
+    }),
     
     new webpack.optimize.UglifyJsPlugin(),
     
     new HtmlWebpackPlugin({
-      title: 'Ompa Loompa',
       template: 'public/index.html',
       favicon: 'public/favicon.ico'
-    })
+    }),
+
+    new ManifestPlugin({seed:{
+      'ompa' : "loompa"
+    }})    
   ],
 
   devServer: {

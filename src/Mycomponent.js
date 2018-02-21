@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import bharatVal from './utils/env';
 
 
 class Mycomponent extends Component {
@@ -12,10 +13,11 @@ class Mycomponent extends Component {
 
 
   render() {
-    
+    console.log('bharatVal : ', bharatVal)
     return (
       <React.Fragment>
         {this.state.nthPlace + 1}
+        {bharatVal}
       </React.Fragment>
     );
   }
